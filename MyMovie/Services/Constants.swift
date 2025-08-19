@@ -26,14 +26,25 @@ struct k {
     struct upCommingScreen {
         static let title = "Upcoming Movie"
     }
+    
+    struct movieDetails {
+        static let movieDetails = "Movie Details"
+    }
+    
     struct colorSet {
         static let lightBlue = Color("LightBlue")
     }
     
     struct iconSet{
         static let forwardArrow = "chevron.forward"
+        static let backArrow = "chevron.backward"
         static let movieIcon = "film.fill"
         static let search = "magnifyingglass"
         static let person = "person.fill"
+        static let dots = "ellipsis"
+    }
+    
+    struct errorMessages {
+        static let invalidURL = "Invalid URL"
     }
 }

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct UpcomingMovie: View {
     @StateObject var upcomingMovideViewModel = UpcomingMovieVM()
+    @State var isEnabled = false
+    
     var adpative = [
         GridItem(.flexible()),
         GridItem(.flexible()),
@@ -19,11 +21,11 @@ struct UpcomingMovie: View {
     var body: some View {
         NavigationStack {
             ScrollView{
-                LazyVGrid(columns: adpative){
+                LazyVGrid(columns: isEnabled ?  [GridItem(.flexible())] : adpative){
                     ForEach(upcomingMovideViewModel.upcomingMovieList) { listItem in
                         //                    AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w500\(listItem.backdrop_path)"))
                         Text(listItem.title)
-                            .frame(width: 100, height: 150)
+                            .frame(maxWidth: isEnabled ? .infinity : 100, minHeight: 150 , maxHeight: 150)
                             .background(Color.brown)
                             .cornerRadius(5)
                             .padding(.bottom,20)
@@ -39,6 +41,9 @@ struct UpcomingMovie: View {
                 ToolbarItem(placement: .topBarLeading) {
                     Image(systemName: k.iconSet.movieIcon)
                         .foregroundColor(k.colorSet.lightBlue)
+                        .onTapGesture {
+                            isEnabled.toggle()
+                        }
                 }
             }
         }
