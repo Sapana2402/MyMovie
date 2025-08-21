@@ -41,7 +41,7 @@ struct k {
         static let movieIcon = "film.fill"
         static let search = "magnifyingglass"
         static let person = "person.fill"
-        static let dots = "ellipsis"
+        static let dots = ""
     }
     
     struct errorMessages {

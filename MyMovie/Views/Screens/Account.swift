@@ -51,6 +51,8 @@ struct Account: View {
                                 Text(k.account.signOut)
                                     .foregroundColor(.red)
                                     .frame(maxWidth: .infinity,alignment: .center)
+                                    .padding(.all,20)
+                                    .badge(10)
 
                             }
                     }

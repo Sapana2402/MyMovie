@@ -25,7 +25,6 @@ class UpcomingMovieVM: ObservableObject {
         do{
             let (data,_) = try await URLSession.shared.data(for: request)
             let decoder = try JSONDecoder().decode(UpcomingMovieModel.self, from: data)
-            print("Decoded data",decoder)
             upcomingMovieList = decoder.results
             self.isLoading = false
         }catch{

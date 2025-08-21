@@ -34,7 +34,18 @@ struct MovieDetails: View {
             }
             .padding(16)
             
-            HStack{
+            HStack(spacing: 10){
+                VStack(spacing: 8){
+                    Image(systemName: k.iconSet.movieIcon)
+                    Text("Reviews")
+                }
+                .frame(alignment: .center)
+                Divider()
+                VStack(spacing: 8){
+                    Image(systemName: k.iconSet.movieIcon)
+                    Text("Reviews")
+                }
+                Divider()
                 VStack(spacing: 8){
                     Image(systemName: k.iconSet.movieIcon)
                     Text("Reviews")
@@ -45,6 +56,9 @@ struct MovieDetails: View {
                     Text("Reviews")
                 }
             }
+            .frame(width: .infinity, height: 80)
+            .background(Color.gray)
+            .padding(16)
             
             Spacer()
                 .navigationTitle(Text(k.movieDetails.movieDetails))
