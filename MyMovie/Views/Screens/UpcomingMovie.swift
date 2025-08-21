@@ -21,14 +21,20 @@ struct UpcomingMovie: View {
     var body: some View {
         NavigationStack {
             ScrollView{
+                
                 LazyVGrid(columns: isEnabled ?  [GridItem(.flexible())] : adpative){
                     ForEach(upcomingMovideViewModel.upcomingMovieList) { listItem in
-                        //                    AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w500\(listItem.backdrop_path)"))
-                        Text(listItem.title)
-                            .frame(maxWidth: isEnabled ? .infinity : 100, minHeight: 150 , maxHeight: 150)
-                            .background(Color.brown)
-                            .cornerRadius(5)
-                            .padding(.bottom,20)
+                        NavigationLink {
+                            MovieDetails(movieId: listItem.id)
+                        } label: {
+                            AsyncImage(url: URL(string:"https://image.tmdb.org/t/p/w500\(listItem.backdrop_path)"))
+//                            Text(listItem.title)
+                                .frame(maxWidth: isEnabled ? .infinity : 100, minHeight: 150 , maxHeight: 150)
+                                .background(Color.brown)
+                                .cornerRadius(5)
+                                .padding(.bottom,20)
+                        }
+
                     }
                 }
                 .task{
