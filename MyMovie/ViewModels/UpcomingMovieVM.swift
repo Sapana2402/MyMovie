@@ -14,7 +14,7 @@ class UpcomingMovieVM: ObservableObject {
     
     func fetchUpCommingMoview() async {
         
-        guard let url = URL(string: "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1&api_key=4c7852dcd8a44ea2b03e9ac958422f16") else {
+        guard let url = URL(string: "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1") else {
                 fatalError(k.errorMessages.invalidURL)
               }
         

@@ -11,9 +11,11 @@ struct MovieDetailsModel: Codable {
     let overview: String
     let genres: [genresDetails]
     let release_date: String
+    let original_title: String
+    let poster_path: String
 }
 
-struct genresDetails: Codable {
+struct genresDetails: Codable, Identifiable {
     let id: Int
     let name: String
 }
