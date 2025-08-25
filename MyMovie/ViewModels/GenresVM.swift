@@ -13,15 +13,7 @@ class GenresVM: ObservableObject{
     @Published var isLoading: Bool = true
     
     func getchGenres()  async{
-        print("inside gener VM")
-        guard let url = URL(string: "https://api.themoviedb.org/3/genre/movie/list?language=en") else {
-            fatalError(k.errorMessages.invalidURL)}
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.timeoutInterval = 10
-        request.setValue(AuthManager.shared.authorization, forHTTPHeaderField: k.apiDetails.authorization)
-        
+        let request = APIService.shared.handleAPI(urlNew: "https://api.themoviedb.org/3/genre/movie/list?language=en")
         do{
             let (data,_) = try await URLSession.shared.data(for: request)
             let decode = try JSONDecoder().decode(GenresModel.self, from: data)
@@ -33,4 +25,4 @@ class GenresVM: ObservableObject{
         }
     }
 }
-//
+

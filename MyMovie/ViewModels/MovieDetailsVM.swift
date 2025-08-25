@@ -15,14 +15,7 @@ class MovieDetailsVM: ObservableObject {
     @Published var isCastLoading: Bool = true
 
     func fetchMovieDetails(id: Int) async  {
-        guard let url = URL(string: "https://api.themoviedb.org/3/movie/\(id)?language=en-US") else {
-            fatalError(k.errorMessages.invalidURL)
-        }
-
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.timeoutInterval = 10
-        request.setValue(AuthManager.shared.authorization, forHTTPHeaderField: "Authorization")
+        let request = APIService.shared.handleAPI(urlNew: "https://api.themoviedb.org/3/movie/\(id)?language=en-US")
         
         do{
             let (data,_) = try await URLSession.shared.data(for: request)
@@ -38,14 +31,7 @@ class MovieDetailsVM: ObservableObject {
     
     
     func fetchCast(movieId: Int) async{
-        guard let url = URL(string: "https://api.themoviedb.org/3/movie/\(movieId)/credits?language=en-US") else {
-            fatalError(k.errorMessages.invalidURL)
-        }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = k.methods.g
-        request.timeoutInterval = 10
-        request.setValue(AuthManager.shared.authorization, forHTTPHeaderField: k.apiDetails.authorization)
+        let request = APIService.shared.handleAPI(urlNew: "https://api.themoviedb.org/3/movie/\(movieId)/credits?language=en-US")
         
         do{
             let (data,_) = try await URLSession.shared.data(for: request)

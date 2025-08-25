@@ -13,15 +13,7 @@ class UpcomingMovieVM: ObservableObject {
     @Published var isLoading: Bool = true
     
     func fetchUpCommingMoview() async {
-        
-        guard let url = URL(string: "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1") else {
-                fatalError(k.errorMessages.invalidURL)
-              }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.timeoutInterval = 10
-        request.setValue(AuthManager.shared.authorization, forHTTPHeaderField: "Authorization")
+        let request = APIService.shared.handleAPI(urlNew: "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1")
         do{
             let (data,_) = try await URLSession.shared.data(for: request)
             let decoder = try JSONDecoder().decode(UpcomingMovieModel.self, from: data)

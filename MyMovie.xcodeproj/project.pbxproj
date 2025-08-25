@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		F5F7B5AC2E5C6D200020BD48 /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = F5F7B5AB2E5C6D200020BD48 /* ActivityIndicatorView */; };
+		F5F7B5B12E5C6FA90020BD48 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = F5F7B5B02E5C6FA90020BD48 /* SwiftUICharts */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		F50EFE322E5347FD00BF6145 /* MyMovie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMovie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +41,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5F7B5AC2E5C6D200020BD48 /* ActivityIndicatorView in Frameworks */,
+				F5F7B5B12E5C6FA90020BD48 /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +85,8 @@
 			);
 			name = MyMovie;
 			packageProductDependencies = (
+				F5F7B5AB2E5C6D200020BD48 /* ActivityIndicatorView */,
+				F5F7B5B02E5C6FA90020BD48 /* SwiftUICharts */,
 			);
 			productName = MyMovie;
 			productReference = F50EFE322E5347FD00BF6145 /* MyMovie.app */;
@@ -107,6 +116,10 @@
 			);
 			mainGroup = F50EFE292E5347FD00BF6145;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				F5F7B5AA2E5C6D200020BD48 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */,
+				F5F7B5AF2E5C6FA90020BD48 /* XCRemoteSwiftPackageReference "ChartView" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = F50EFE332E5347FD00BF6145 /* Products */;
 			projectDirPath = "";
@@ -337,6 +350,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F5F7B5AA2E5C6D200020BD48 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/ActivityIndicatorView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.1;
+			};
+		};
+		F5F7B5AF2E5C6FA90020BD48 /* XCRemoteSwiftPackageReference "ChartView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/ChartView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F5F7B5AB2E5C6D200020BD48 /* ActivityIndicatorView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F5F7B5AA2E5C6D200020BD48 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */;
+			productName = ActivityIndicatorView;
+		};
+		F5F7B5B02E5C6FA90020BD48 /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F5F7B5AF2E5C6FA90020BD48 /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F50EFE2A2E5347FD00BF6145 /* Project object */;
 }

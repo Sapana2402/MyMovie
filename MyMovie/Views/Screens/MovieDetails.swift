@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftUICharts
 
 struct MovieOption: Identifiable {
     let id = UUID()
@@ -36,8 +37,10 @@ struct MovieDetails: View {
     var body: some View {
         NavigationStack{
             ScrollView{
+                
                 if mvDetails.isLoading{
-                    ProgressView()
+//                    ProgressView()
+                    MyActivityIndicator()
                 }else{
                     ZStack(alignment: .leading){
                         AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w500\(mvDetails.mvDetails?.poster_path ?? "")")) { image in
@@ -48,7 +51,7 @@ struct MovieDetails: View {
                                 .clipped()
                                 .clipShape(SlantedShape())
                         } placeholder: {
-                            ProgressView()
+                            MyActivityIndicator()
                                 .frame(maxWidth: .infinity, minHeight: 200, maxHeight: 200)
                         }
                         
@@ -60,7 +63,8 @@ struct MovieDetails: View {
                                 .padding(.leading, 16)
                                 .offset(y: 26)
                         } placeholder: {
-                            ProgressView()
+//                            ProgressView()
+                            MyActivityIndicator()
                                 .frame(maxWidth: .infinity, minHeight: 200, maxHeight: 200)
                         }
 
@@ -136,7 +140,8 @@ struct MovieDetails: View {
                     
                     if isCastShown{
                     if mvDetails.isCastLoading{
-                        ProgressView()
+//                        ProgressView()
+                        MyActivityIndicator()
                     }else{
                         if !mvDetails.castDetails.isEmpty{
                             LazyVGrid(columns: adaptive) {
@@ -148,7 +153,8 @@ struct MovieDetails: View {
                                                 .frame(width: 100, height: 150)
                                                 .cornerRadius(8)
                                         } placeholder: {
-                                            ProgressView()
+//                                            ProgressView()
+                                            MyActivityIndicator()
                                                 .frame(maxWidth: .infinity, minHeight: 200, maxHeight: 200)
                                         }
                                         

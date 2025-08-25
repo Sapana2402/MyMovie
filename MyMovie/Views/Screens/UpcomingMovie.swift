@@ -10,7 +10,7 @@ import SwiftUI
 struct UpcomingMovie: View {
     @StateObject var upcomingMovideViewModel = UpcomingMovieVM()
     @State var isEnabled = false
-    
+    @State var showLoadingIndicator = true
     var adpative = [
         GridItem(.flexible()),
         GridItem(.flexible()),
@@ -21,7 +21,6 @@ struct UpcomingMovie: View {
     var body: some View {
         NavigationStack {
             ScrollView{
-                
                 LazyVGrid(columns: isEnabled ?  [GridItem(.flexible())] : adpative){
                     ForEach(upcomingMovideViewModel.upcomingMovieList) { listItem in
                         NavigationLink {
