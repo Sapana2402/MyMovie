@@ -17,6 +17,13 @@ struct MovieOption: Identifiable {
 struct MovieDetails: View {
     @Environment(\.dismiss) var dismiss
     @StateObject var mvDetails = MovieDetailsVM()
+    @State var isCastShown: Bool = false
+    let adaptive = [
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
+    
     let movieId: Int
     
     let items: [MovieOption] = [
@@ -91,7 +98,9 @@ struct MovieDetails: View {
                                 .fontWeight(.bold)
                             if let genres = mvDetails.mvDetails?.genres {
                                    Text(genres.map { $0.name }.joined(separator: ", "))
-                               }
+                            }else{
+                                Text("-")
+                            }
 
                         }
                         .frame(maxWidth: .infinity)
@@ -109,6 +118,59 @@ struct MovieDetails: View {
                     
                     Text(mvDetails.mvDetails?.overview ?? "-")
                         .padding()
+                    
+                    HStack{
+                        Text("Cast")
+                        Spacer()
+                        Image(systemName: isCastShown ? k.iconSet.upArrow : k.iconSet.downArrow)
+                            .onTapGesture {
+                                Task{
+                                    await mvDetails.fetchCast(movieId: movieId)
+                                }
+                            }
+                    }
+                    .padding(.horizontal,16)
+                    
+                    if mvDetails.isCastLoading{
+                        ProgressView()
+                    }else{
+                        LazyVGrid(columns: adaptive) {
+                            ForEach(mvDetails.castDetails,id: \.id) { listItem in
+                                ZStack{
+                                    AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w500\(listItem.profile_path)")) { image in
+                                        image
+                                            .resizable()
+                                            .frame(width: 100, height: 150)
+                                            .cornerRadius(8)
+                                    } placeholder: {
+                                        ProgressView()
+                                            .frame(maxWidth: .infinity, minHeight: 200, maxHeight: 200)
+                                    }
+                                    
+                                    
+                                    Rectangle()
+                                           .fill(Color.black.opacity(0.5))
+                                           .frame(width: 100, height: 150)
+                                           .cornerRadius(8)
+
+                                    VStack{
+                                        Text(listItem.original_name)
+                                            .font(.footnote)
+                                            .foregroundStyle(.white)
+                                            .fontWeight(.bold)
+                                            .padding(.horizontal,5)
+                                        
+                                        Text(listItem.character)
+                                            .multilineTextAlignment(.center)
+                                            .font(.caption)
+                                            .foregroundStyle(.white)
+                                            .padding(.horizontal,5)
+                                    }
+                                }
+                            }
+                            
+                        }
+                    }
                 }
                     Spacer()
                     

@@ -18,6 +18,11 @@ struct k {
     struct apiDetails {
         static let authorization = "Authorization"
     }
+    
+    struct methods {
+        static let g = "GET"
+    }
+    
     struct account {
         static let favorites = "Favorites"
         static let watchList = "WatchList"
@@ -46,6 +51,8 @@ struct k {
         static let search = "magnifyingglass"
         static let person = "person.fill"
         static let dots = "ellipsis"
+        static let downArrow = "chevron.down"
+        static let upArrow = "chevron.up"
     }
     
     struct errorMessages {

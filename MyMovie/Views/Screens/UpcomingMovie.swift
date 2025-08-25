@@ -28,7 +28,6 @@ struct UpcomingMovie: View {
                             MovieDetails(movieId: listItem.id)
                         } label: {
                             AsyncImage(url: URL(string:"https://image.tmdb.org/t/p/w500\(listItem.backdrop_path)"))
-//                            Text(listItem.title)
                                 .frame(maxWidth: isEnabled ? .infinity : 100, minHeight: 150 , maxHeight: 150)
                                 .background(Color.brown)
                                 .cornerRadius(5)
