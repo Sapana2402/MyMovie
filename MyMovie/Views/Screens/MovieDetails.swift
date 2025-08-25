@@ -33,19 +33,32 @@ struct MovieDetails: View {
                     ProgressView()
                 }else{
                     ZStack(alignment: .leading){
-//                        Image("testing")
-                        AsyncImage(url: URL(string:"https://image.tmdb.org/t/p/w500\(mvDetails.mvDetails?.poster_path ?? "")"))
-//                            .resizable()
-                            .frame(maxWidth: .infinity, minHeight: 200, maxHeight: 200)
-                            .clipShape(SlantedShape())
+                        AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w500\(mvDetails.mvDetails?.poster_path ?? "")")) { image in
+                            image
+                                .resizable()
+                                .scaledToFill()
+                                .frame(maxWidth: .infinity, minHeight: 200, maxHeight: 200)
+                                .clipped()
+                                .clipShape(SlantedShape())
+                        } placeholder: {
+                            ProgressView()
+                                .frame(maxWidth: .infinity, minHeight: 200, maxHeight: 200)
+                        }
                         
-                        Image("test")
-                            .resizable()
-                            .frame(width: 100, height: 150)
-                            .cornerRadius(8)
-                            .padding(.leading, 16)
-                            .offset(y: 26)
+                        AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w500\(mvDetails.mvDetails?.backdrop_path ?? "")")) { image in
+                            image
+                                .resizable()
+                                .frame(width: 100, height: 150)
+                                .cornerRadius(8)
+                                .padding(.leading, 16)
+                                .offset(y: 26)
+                        } placeholder: {
+                            ProgressView()
+                                .frame(maxWidth: .infinity, minHeight: 200, maxHeight: 200)
+                        }
+
                     }
+                    
                     HStack(spacing: 5){
                         Text(mvDetails.mvDetails?.original_title ?? "-")
                             .font(.title3)
@@ -114,7 +127,14 @@ struct MovieDetails: View {
                             }
                             
                             ToolbarItem(placement: .topBarTrailing) {
-                                Image(systemName: k.iconSet.dots)
+                                let shareURL = URL(string: "https://image.tmdb.org/t/p/w500\(mvDetails.mvDetails?.poster_path ?? "")")
+                                    ?? URL(string: "https://image.tmdb.org")!   // fallback
+
+                                ShareLink(item: shareURL, subject: Text(mvDetails.mvDetails?.original_title ?? "-"), message: Text(mvDetails.mvDetails?.release_date ?? "-")) {
+                                    Image(systemName: k.iconSet.dots)
+                                        .foregroundColor(.black)
+                                }
+
                             }
                         }
                 }

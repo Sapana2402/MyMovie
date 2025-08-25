@@ -13,6 +13,7 @@ struct MovieDetailsModel: Codable {
     let release_date: String
     let original_title: String
     let poster_path: String
+    let backdrop_path: String
 }
 
 struct genresDetails: Codable, Identifiable {
