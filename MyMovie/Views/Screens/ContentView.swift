@@ -17,18 +17,21 @@ struct ContentView: View {
                         Image(systemName: k.iconSet.movieIcon)
                         Text(k.tabs.upcomming)
                     }
+                    .tag(0)
                 
                 SearchScreen()
                     .tabItem {
                         Image(systemName: k.iconSet.search)
                         Text(k.tabs.search)
                     }
+                    .tag(1)
                 
                 Account()
                     .tabItem {
                         Image(systemName: k.iconSet.person)
                         Text(k.tabs.account)
                     }
+                    .tag(2)
         }
     }
 }

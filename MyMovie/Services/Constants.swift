@@ -15,6 +15,9 @@ struct k {
         static let account = "Account"
     }
     
+    struct apiDetails {
+        static let authorization = "Authorization"
+    }
     struct account {
         static let favorites = "Favorites"
         static let watchList = "WatchList"
@@ -33,6 +36,7 @@ struct k {
     
     struct colorSet {
         static let lightBlue = Color("LightBlue")
+        static let lightGray = Color("LightGray")
     }
     
     struct iconSet{
