@@ -125,51 +125,60 @@ struct MovieDetails: View {
                         Image(systemName: isCastShown ? k.iconSet.upArrow : k.iconSet.downArrow)
                             .onTapGesture {
                                 Task{
-                                    await mvDetails.fetchCast(movieId: movieId)
+                                    isCastShown.toggle()
+                                    if isCastShown{
+                                        await mvDetails.fetchCast(movieId: movieId)
+                                    }
                                 }
                             }
                     }
                     .padding(.horizontal,16)
                     
+                    if isCastShown{
                     if mvDetails.isCastLoading{
                         ProgressView()
                     }else{
-                        LazyVGrid(columns: adaptive) {
-                            ForEach(mvDetails.castDetails,id: \.id) { listItem in
-                                ZStack{
-                                    AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w500\(listItem.profile_path)")) { image in
-                                        image
-                                            .resizable()
+                        if !mvDetails.castDetails.isEmpty{
+                            LazyVGrid(columns: adaptive) {
+                                ForEach(mvDetails.castDetails,id: \.id) { listItem in
+                                    ZStack{
+                                        AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w500\(listItem.profile_path)")) { image in
+                                            image
+                                                .resizable()
+                                                .frame(width: 100, height: 150)
+                                                .cornerRadius(8)
+                                        } placeholder: {
+                                            ProgressView()
+                                                .frame(maxWidth: .infinity, minHeight: 200, maxHeight: 200)
+                                        }
+                                        
+                                        Rectangle()
+                                            .fill(Color.black.opacity(0.5))
                                             .frame(width: 100, height: 150)
                                             .cornerRadius(8)
-                                    } placeholder: {
-                                        ProgressView()
-                                            .frame(maxWidth: .infinity, minHeight: 200, maxHeight: 200)
-                                    }
-                                    
-                                    
-                                    Rectangle()
-                                           .fill(Color.black.opacity(0.5))
-                                           .frame(width: 100, height: 150)
-                                           .cornerRadius(8)
-
-                                    VStack{
-                                        Text(listItem.original_name)
-                                            .font(.footnote)
-                                            .foregroundStyle(.white)
-                                            .fontWeight(.bold)
-                                            .padding(.horizontal,5)
                                         
-                                        Text(listItem.character)
-                                            .multilineTextAlignment(.center)
-                                            .font(.caption)
-                                            .foregroundStyle(.white)
-                                            .padding(.horizontal,5)
+                                        VStack{
+                                            Text(listItem.original_name)
+                                                .font(.footnote)
+                                                .foregroundStyle(.white)
+                                                .fontWeight(.bold)
+                                                .padding(.horizontal,5)
+                                            
+                                            Text(listItem.character)
+                                                .multilineTextAlignment(.center)
+                                                .font(.caption)
+                                                .foregroundStyle(.white)
+                                                .padding(.horizontal,5)
+                                        }
                                     }
                                 }
                             }
-                            
+                        }else{
+                            Text("Cast details not available")
+                                .foregroundColor(.secondary)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
                         }
+                    }
                     }
                 }
                     Spacer()
